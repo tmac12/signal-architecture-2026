@@ -1,0 +1,17 @@
+<h1>Demo httpResource with Signal</h1>
+<button (click)="updateUser(1)">Load User 1</button>
+<button (click)="updateUser(2)">Load User 2</button>
+
+@if (userResource.isLoading()) {
+  <p>Loading user...</p>
+}
+
+@if (userResource.error()) {
+  <p style="color: red">Error: {{ userResource.error() }}</p>
+}
+
+<!-- {{ userResource.value() | json }} -->
+@if (userResource.hasValue()) {
+  <h2>User Details</h2>
+  <pre>{{ userResource.value() | json }}</pre>
+}

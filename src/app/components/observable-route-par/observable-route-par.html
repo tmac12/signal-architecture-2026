@@ -1,0 +1,11 @@
+<p>observable-route-par works!</p>
+@if (isLoading()) {
+  <p>Loading...</p>
+}
+@if (error()) {
+  <p style="color: red">Error: {{ error() }}</p>
+}
+@if (user$ | async; as user) {
+  <h2>User Details</h2>
+  <pre>{{ user | json }}</pre>
+}

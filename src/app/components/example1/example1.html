@@ -1,0 +1,14 @@
+<h1>Observable Demo 1</h1>
+<button (click)="updateUser(1)">Load User 1</button>
+<button (click)="updateUser(2)">Load User 2</button>
+
+@if (isLoading()) {
+  <p>Loading...</p>
+}
+@if (error()) {
+  <p style="color: red">Error: {{ error() }}</p>
+}
+@if (user$ | async; as user) {
+  <h2>User Details</h2>
+  <pre>{{ user | json }}</pre>
+}

@@ -1,0 +1,45 @@
+<h1>rx-resource-demo works!</h1>
+
+@if (userResource.isLoading()) {
+  <p>Loading...</p>
+}
+<pre>
+    {{ userResource.value() | json }}
+</pre>
+
+<div>
+  <button (click)="nextUser()">Next User</button>
+
+  <h2>Single User {{ userId() }}</h2>
+
+  <pre>
+      {{ userResourceById.value() | json }}
+  </pre>
+</div>
+
+<!-- <div>
+    <h2>Search Users</h2>
+    
+    <input type="text" (input)="searchTerm.set($event.target.value)" placeholder="Search users..." />
+    
+    {{ searchResults.value() | json }}
+</div> -->
+
+<div>
+  <h2>User With post {{ userId() }}</h2>
+  @if (userPostsResource.isLoading()) {
+    <p>Loading user and posts...</p>
+  }
+  <details>
+    <summary>Debug User Posts</summary>
+    <pre>
+        {{ userPostsResource.value() | json }}
+    </pre>
+  </details>
+  <h1>{{ userPostsResource.value()?.user?.name }}</h1>
+  <ul>
+    @for (post of userPostsResource.value()?.posts; track post.id) {
+      <li>{{ post.title }}</li>
+    }
+  </ul>
+</div>
