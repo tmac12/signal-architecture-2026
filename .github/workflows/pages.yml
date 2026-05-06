@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -22,11 +22,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: npm run build --if-present
-      - name: Deploy with angular-cli-ghpages
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          npx --yes angular-cli-ghpages --dir=dist/signal-architecture/browser --branch=gh-pages --repo=https://github.com/tmac12/signal-architecture-2026.git
+        run: npm run build -- --configuration=production
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/signal-architecture/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
