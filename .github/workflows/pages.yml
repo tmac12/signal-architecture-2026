@@ -14,3 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: bitovi/github-actions-angular-to-github-pages@v1.0.0
+        with:
+          path: dist/signal-architecture/browser
+          build_command: npm run build -- --base-href=/signal-architecture-2026/
