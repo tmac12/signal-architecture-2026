@@ -23,14 +23,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build --if-present
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./dist/signal-architecture/browser
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+      - name: Deploy with angular-cli-ghpages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx --yes angular-cli-ghpages --dir=dist/signal-architecture/browser --branch=gh-pages --repo=https://github.com/tmac12/signal-architecture-2026.git --silent
