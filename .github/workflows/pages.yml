@@ -27,4 +27,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx --yes angular-cli-ghpages --dir=dist/signal-architecture/browser --branch=gh-pages --repo=https://github.com/tmac12/signal-architecture-2026.git --silent
+          npx --yes angular-cli-ghpages --dir=dist/signal-architecture/browser --branch=gh-pages --repo=https://github.com/tmac12/signal-architecture-2026.git
